@@ -1,6 +1,28 @@
 @import "tailwindcss";
 
+:root {
+  /* Polices */
+  --font-poppins: "Poppins", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --font-comfortaa: "Comfortaa", sans-serif;
+  --font-raleway: "Raleway", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-roboto: "Roboto", sans-serif;
+
+  /* Couleurs principales */
+  --color-main-dark: #25282B;
+  --color-main-yellow: #FDC435;
+  --color-gray-dark: #333333;
+  --color-gray-medium: #828282;
+  --color-gray-light: #E8ECF4;
+  --color-bg-light: #F9FAFF;
+  /* #FFFFFF et #000000 sont déjà inclus de base avec --color-white et --color-black */
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: var(--color-bg-light);
+  color: var(--color-main-dark);
+  font-family: var(--font-poppins);
 }
