@@ -23,7 +23,7 @@ const Navbar = () => {
             <li key={link.label}>
               <a
                 href={link.href}
-                className="text-base text-[var(--color-main-dark)] hover:text-[var(--color-main-yellow)] transition-colors"
+                className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
               >
                 {link.label}
               </a>
