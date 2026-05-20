@@ -4,7 +4,7 @@ import imageTopRight from "./assets/ImageTopRight.png";
 
 function App() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg-light)]">
       <img
         src={imageTopRight}
         alt=""
