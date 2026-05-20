@@ -29,8 +29,18 @@ const Intro = () => {
         className="flex items-center gap-4"
         style={{ fontFamily: "var(--font-roboto)" }}
       >
-        <Button variant="primary">Projects</Button>
-        <Button variant="outline">LinkedIn</Button>
+        <Button
+          variant="primary"
+          className="shadow-[0_15px_30px_-8px_rgba(15,23,42,0.25)]"
+        >
+          Projects
+        </Button>
+        <Button
+          variant="outline"
+          className="shadow-[0_15px_30px_-8px_rgba(15,23,42,0.25)]"
+        >
+          LinkedIn
+        </Button>
       </div>
     </section>
   );

@@ -18,7 +18,7 @@ const ProjectCard = ({
   const imageFirst = imagePosition === "right";
 
   return (
-    <article className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-md w-full max-w-5xl md:h-[500px]">
+    <article className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(15,23,42,0.25)] w-full max-w-5xl md:h-[500px]">
       <div
         className={`w-full md:w-1/2 flex items-center px-10 py-8 md:py-0 ${
           imageFirst ? "md:order-2" : "md:order-1"
