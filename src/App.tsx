@@ -1,30 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import imageTopRight from "./assets/ImageTopRight.png";
+import HomeLayout from "./layouts/HomeLayout";
+import BaseLayout from "./layouts/BaseLayout";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg-light)]">
-        <img
-          src={imageTopRight}
-          alt=""
-          className="absolute top-0 right-0 w-[55%] max-w-[600px] h-auto pointer-events-none select-none"
-        />
-        <div className="relative">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
-          <Footer />
-        </div>
-      </div>
+      <Routes>
+        <Route element={<HomeLayout />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+        <Route element={<BaseLayout />}>
+          <Route path="/about" element={<AboutPage />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
