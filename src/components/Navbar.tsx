@@ -1,7 +1,7 @@
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contacts", href: "#contacts" },
+  { label: "About", href: "about" },
+  { label: "Projects", href: "projects" },
+  { label: "Contacts", href: "contacts" },
 ];
 
 const Navbar = () => {
@@ -11,7 +11,7 @@ const Navbar = () => {
       style={{ fontFamily: "var(--font-comfortaa)" }}
     >
       <a
-        href="#"
+        href="/"
         className="text-xl text-[var(--color-main-dark)] tracking-wide"
       >
         Madelyn Torff
