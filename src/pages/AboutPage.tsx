@@ -1,4 +1,5 @@
 import bg2 from "../assets/bg-2.png";
+import Button from "../components/Button";
 
 const AboutPage = () => {
   return (
@@ -18,6 +19,9 @@ const AboutPage = () => {
           neque auctor dis ipsum. Pretium cras amet odio amet eleifend id sed
           cras sed. Aliquet risus posuere aliquet imperdiet sit.
         </p>
+        <Button variant="primary" className="mt-8">
+          Resume
+        </Button>
       </div>
 
       <div className="flex-1 flex justify-center">
