@@ -1,7 +1,9 @@
+import { Link } from "react-router";
+
 const navLinks = [
-  { label: "About", href: "about" },
-  { label: "Projects", href: "projects" },
-  { label: "Contacts", href: "contacts" },
+  { label: "About", to: "/about" },
+  { label: "Projects", to: "/projects" },
+  { label: "Contacts", to: "/contacts" },
 ];
 
 const Navbar = () => {
@@ -10,23 +12,23 @@ const Navbar = () => {
       className="w-full px-10 py-6 flex items-center justify-between"
       style={{ fontFamily: "var(--font-comfortaa)" }}
     >
-      <a
-        href="/"
+      <Link
+        to="/"
         className="text-xl text-[var(--color-main-dark)] tracking-wide"
       >
         Madelyn Torff
-      </a>
+      </Link>
 
       <nav>
         <ul className="flex items-center gap-10">
           {navLinks.map((link) => (
             <li key={link.label}>
-              <a
-                href={link.href}
+              <Link
+                to={link.to}
                 className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
