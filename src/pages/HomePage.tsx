@@ -1,32 +1,5 @@
 import Intro from "../components/Intro";
-import ProjectCard from "../components/ProjectCard";
-import img1 from "../assets/img1.png";
-import img2 from "../assets/img2.png";
-import img3 from "../assets/img3.png";
-
-const projects = [
-  {
-    title: "Project Title 1",
-    description:
-      "Short description of the project. You can add more details on the project page.",
-    image: img1,
-    href: "#",
-  },
-  {
-    title: "Project Title 2",
-    description:
-      "Short description of the project. You can add more details on the project page.",
-    image: img2,
-    href: "#",
-  },
-  {
-    title: "Project Title 3",
-    description:
-      "Short description of the project. You can add more details on the project page.",
-    image: img3,
-    href: "#",
-  },
-];
+import ProjectList from "../components/ProjectList";
 
 const HomePage = () => {
   return (
@@ -39,18 +12,7 @@ const HomePage = () => {
         >
           My Projects
         </h2>
-        <div className="flex flex-col gap-16 items-center max-w-5xl mx-auto">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              title={project.title}
-              description={project.description}
-              image={project.image}
-              imagePosition={index % 2 === 0 ? "left" : "right"}
-              href={project.href}
-            />
-          ))}
-        </div>
+        <ProjectList />
       </section>
     </>
   );
