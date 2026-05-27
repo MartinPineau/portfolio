@@ -5,9 +5,11 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactsPage from "./pages/ContactsPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import { ProjectsProvider } from "./context/ProjectsContext";
 
 const App = () => {
   return (
+    <ProjectsProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<HomeLayout />}>
@@ -20,6 +22,7 @@ const App = () => {
         </Route>
       </Routes>
     </BrowserRouter>
+    </ProjectsProvider>
   );
 };
 
