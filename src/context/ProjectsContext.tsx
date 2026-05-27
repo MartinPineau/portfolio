@@ -31,21 +31,21 @@ const defaultProjects: Project[] = [
     title: "Project Title 1",
     description: "Short description of the project. You can add more details on the project page.",
     image: img1,
-    href: "#",
+    href: "https://games.deschamps-labs.fr/dashboard",
   },
   {
     id: "2",
     title: "Project Title 2",
     description: "Short description of the project. You can add more details on the project page.",
     image: img2,
-    href: "#",
+    href: "https://games.deschamps-labs.fr/games/19",
   },
   {
     id: "3",
     title: "Project Title 3",
     description: "Short description of the project. You can add more details on the project page.",
     image: img3,
-    href: "#",
+    href: "https://games.deschamps-labs.fr/games/24",
   },
 ];
 
