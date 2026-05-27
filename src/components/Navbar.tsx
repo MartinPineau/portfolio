@@ -14,7 +14,7 @@ const Navbar = () => {
     >
       <Link
         to="/"
-        className="text-xl text-[var(--color-main-dark)] tracking-wide"
+        className="text-xl text-[var(--color-main-dark)] tracking-wide transition-transform hover:scale-110 inline-block"
       >
         Madelyn Torff
       </Link>
