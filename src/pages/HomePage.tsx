@@ -1,5 +1,6 @@
 import Intro from "../components/Intro";
 import ProjectList from "../components/ProjectList";
+import Testimonials from "../components/Testimonials";
 
 const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage = () => {
         </h2>
         <ProjectList />
       </section>
+      <Testimonials />
     </>
   );
 };
