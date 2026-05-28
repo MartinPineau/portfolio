@@ -20,6 +20,7 @@ export type Project = {
 type ProjectsContextType = {
   projects: Project[];
   updateProject: (id: string, updated: Omit<Project, "id">) => void;
+  deleteProject: (id: string) => void;
 };
 
 const ProjectsContext = createContext<ProjectsContextType | null>(null);
@@ -66,8 +67,12 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const deleteProject = (id: string) => {
+    setProjects((prev) => prev.filter((p) => p.id !== id));
+  };
+
   return (
-    <ProjectsContext.Provider value={{ projects, updateProject }}>
+    <ProjectsContext.Provider value={{ projects, updateProject, deleteProject }}>
       {children}
     </ProjectsContext.Provider>
   );

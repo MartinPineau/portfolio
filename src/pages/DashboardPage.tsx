@@ -11,8 +11,14 @@ const ProjectImage = ({ project }: { project: Project }) =>
   );
 
 const DashboardPage = () => {
-  const { projects } = useProjects();
+  const { projects, deleteProject } = useProjects();
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+
+  const handleDelete = (project: Project) => {
+    if (window.confirm(`Supprimer "${project.title}" ?`)) {
+      deleteProject(project.id);
+    }
+  };
 
   return (
     <div className="max-w-5xl mx-auto px-6 md:px-10 py-16">
@@ -53,8 +59,8 @@ const DashboardPage = () => {
                       <FaPencil className="w-4 h-4" />
                     </button>
                     <button
-                      disabled
-                      className="p-2 rounded-lg text-red-500 opacity-40 hover:bg-red-100 cursor-not-allowed"
+                      onClick={() => handleDelete(project)}
+                      className="p-2 rounded-lg text-red-500 hover:bg-red-100 cursor-pointer transition-colors"
                     >
                       <FaTrash className="w-4 h-4" />
                     </button>
