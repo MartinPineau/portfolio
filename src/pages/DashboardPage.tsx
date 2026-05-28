@@ -1,16 +1,7 @@
+import { useState } from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 import { useProjects, type Project } from "../context/ProjectsContext";
-
-const ActionButtons = () => (
-  <div className="flex items-center gap-3">
-    <button className="p-2 rounded-lg text-[var(--color-main-dark)] opacity-40 hover:bg-[var(--color-gray-light)] cursor-pointer">
-      <FaPencil className="w-4 h-4" />
-    </button>
-    <button className="p-2 rounded-lg text-red-500 opacity-40 hover:bg-red-100 cursor-pointer">
-      <FaTrash className="w-4 h-4" />
-    </button>
-  </div>
-);
+import EditProjectModal from "../components/EditProjectModal";
 
 const ProjectImage = ({ project }: { project: Project }) =>
   project.image ? (
@@ -21,6 +12,7 @@ const ProjectImage = ({ project }: { project: Project }) =>
 
 const DashboardPage = () => {
   const { projects } = useProjects();
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
 
   return (
     <div className="max-w-5xl mx-auto px-6 md:px-10 py-16">
@@ -52,12 +44,34 @@ const DashboardPage = () => {
                 <td className="px-6 py-4 font-semibold text-[var(--color-main-dark)] whitespace-nowrap">{project.title}</td>
                 <td className="px-6 py-4 text-[var(--color-gray-medium)] max-w-xs truncate">{project.description}</td>
                 <td className="px-6 py-4 text-[var(--color-gray-medium)] whitespace-nowrap">{project.href}</td>
-                <td className="px-6 py-4"><ActionButtons /></td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setEditingProject(project)}
+                      className="p-2 rounded-lg text-[var(--color-main-dark)] hover:bg-[var(--color-gray-light)] cursor-pointer transition-colors"
+                    >
+                      <FaPencil className="w-4 h-4" />
+                    </button>
+                    <button
+                      disabled
+                      className="p-2 rounded-lg text-red-500 opacity-40 hover:bg-red-100 cursor-not-allowed"
+                    >
+                      <FaTrash className="w-4 h-4" />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {editingProject && (
+        <EditProjectModal
+          project={editingProject}
+          onClose={() => setEditingProject(null)}
+        />
+      )}
     </div>
   );
 };

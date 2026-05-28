@@ -19,6 +19,7 @@ export type Project = {
 
 type ProjectsContextType = {
   projects: Project[];
+  updateProject: (id: string, updated: Omit<Project, "id">) => void;
 };
 
 const ProjectsContext = createContext<ProjectsContextType | null>(null);
@@ -50,7 +51,7 @@ const defaultProjects: Project[] = [
 ];
 
 export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
-  const [projects] = useState<Project[]>(() => {
+  const [projects, setProjects] = useState<Project[]>(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored ? JSON.parse(stored) : defaultProjects;
   });
@@ -59,8 +60,14 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
   }, [projects]);
 
+  const updateProject = (id: string, updated: Omit<Project, "id">) => {
+    setProjects((prev) =>
+      prev.map((p) => (p.id === id ? { ...updated, id } : p))
+    );
+  };
+
   return (
-    <ProjectsContext.Provider value={{ projects }}>
+    <ProjectsContext.Provider value={{ projects, updateProject }}>
       {children}
     </ProjectsContext.Provider>
   );
