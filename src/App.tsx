@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { ProjectsProvider } from "./context/ProjectsContext";
+import { ContactsProvider } from "./context/ContactsContext";
 import HomeLayout from "./layouts/HomeLayout";
 import BaseLayout from "./layouts/BaseLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -12,6 +13,7 @@ import DashboardPage from "./pages/DashboardPage";
 const App = () => {
   return (
     <ProjectsProvider>
+      <ContactsProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<HomeLayout />}>
@@ -27,6 +29,7 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
+      </ContactsProvider>
     </ProjectsProvider>
   );
 };
