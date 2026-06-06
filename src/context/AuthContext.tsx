@@ -4,7 +4,7 @@ import { type User } from "../types";
 import { AuthContext, type AuthAction } from "./authContext";
 import { GOOGLE_CLIENT_ID, logout as googleLogout } from "../services/authService";
 
-function authReducer(state: User | null, action: AuthAction): User | null {
+function authReducer(_state: User | null, action: AuthAction): User | null {
   switch (action.type) {
     case "LOGIN":
       return action.payload;

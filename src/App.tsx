@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { AuthProvider } from "./context/AuthContext";
 import { ProjectsProvider } from "./context/ProjectsContext";
@@ -6,12 +7,13 @@ import HomeLayout from "./layouts/HomeLayout";
 import BaseLayout from "./layouts/BaseLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
-import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import ContactsPage from "./pages/ContactsPage";
-import ProjectsPage from "./pages/ProjectsPage";
-import LoginPage from "./pages/LoginPage";
-import AdminProjectsPage from "./pages/AdminProjectsPage";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ContactsPage = lazy(() => import("./pages/ContactsPage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const AdminProjectsPage = lazy(() => import("./pages/AdminProjectsPage"));
 
 const App = () => {
   return (
@@ -19,22 +21,24 @@ const App = () => {
       <ProjectsProvider>
         <ContactsProvider>
           <BrowserRouter>
-            <Routes>
-              <Route element={<HomeLayout />}>
-                <Route path="/" element={<HomePage />} />
-              </Route>
-              <Route element={<BaseLayout />}>
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contacts" element={<ContactsPage />} />
-                <Route path="/projects" element={<ProjectsPage />} />
-              </Route>
-              <Route path="/login" element={<LoginPage />} />
-              <Route element={<ProtectedRoute />}>
-                <Route path="/admin" element={<AdminLayout />}>
-                  <Route path="projects" element={<AdminProjectsPage />} />
+            <Suspense fallback={null}>
+              <Routes>
+                <Route element={<HomeLayout />}>
+                  <Route path="/" element={<HomePage />} />
                 </Route>
-              </Route>
-            </Routes>
+                <Route element={<BaseLayout />}>
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contacts" element={<ContactsPage />} />
+                  <Route path="/projects" element={<ProjectsPage />} />
+                </Route>
+                <Route path="/login" element={<LoginPage />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route path="projects" element={<AdminProjectsPage />} />
+                  </Route>
+                </Route>
+              </Routes>
+            </Suspense>
           </BrowserRouter>
         </ContactsProvider>
       </ProjectsProvider>
