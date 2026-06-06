@@ -35,7 +35,7 @@ const Testimonials = () => {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="px-10 py-16 bg-white"
+      className="px-10 py-16"
     >
       <h2
         id="testimonials-heading"
