@@ -8,27 +8,27 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactsPage from "./pages/ContactsPage";
 import ProjectsPage from "./pages/ProjectsPage";
-import DashboardPage from "./pages/DashboardPage";
+import AdminProjectsPage from "./pages/AdminProjectsPage";
 
 const App = () => {
   return (
     <ProjectsProvider>
       <ContactsProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<HomeLayout />}>
-            <Route path="/" element={<HomePage />} />
-          </Route>
-          <Route element={<BaseLayout />}>
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contacts" element={<ContactsPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-          </Route>
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="projects" element={<DashboardPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<HomeLayout />}>
+              <Route path="/" element={<HomePage />} />
+            </Route>
+            <Route element={<BaseLayout />}>
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contacts" element={<ContactsPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+            </Route>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="projects" element={<AdminProjectsPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </ContactsProvider>
     </ProjectsProvider>
   );

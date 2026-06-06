@@ -50,11 +50,13 @@ const Testimonials = () => {
         className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
         aria-label="Client testimonials"
       >
-        {testimonials.filter((t) => t.visible).map((t) => (
-          <li key={t.id}>
-            <TestimonialCard {...t} />
-          </li>
-        ))}
+        {testimonials
+          .filter((t) => t.visible)
+          .map((t) => (
+            <li key={t.id}>
+              <TestimonialCard {...t} />
+            </li>
+          ))}
       </ol>
     </section>
   );

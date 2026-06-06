@@ -45,7 +45,11 @@ const Navbar = () => {
         className="md:hidden text-[var(--color-main-dark)] cursor-pointer"
         onClick={() => setMenuOpen((prev) => !prev)}
       >
-        {menuOpen ? <FaXmark className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+        {menuOpen ? (
+          <FaXmark className="w-6 h-6" />
+        ) : (
+          <FaBars className="w-6 h-6" />
+        )}
       </button>
 
       {/* Mobile menu */}

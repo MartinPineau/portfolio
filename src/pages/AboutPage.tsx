@@ -25,11 +25,7 @@ const AboutPage = () => {
       </div>
 
       <div className="flex-1 flex justify-center">
-        <img
-          src={bg2}
-          alt="Profile"
-          className="w-full max-w-[420px] h-auto"
-        />
+        <img src={bg2} alt="Profile" className="w-full max-w-[420px] h-auto" />
       </div>
     </section>
   );

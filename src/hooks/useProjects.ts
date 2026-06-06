@@ -3,6 +3,7 @@ import { ProjectsContext } from "../context/projectsContext";
 
 export const useProjects = () => {
   const context = useContext(ProjectsContext);
-  if (!context) throw new Error("useProjects must be used within a ProjectsProvider");
+  if (!context)
+    throw new Error("useProjects must be used within a ProjectsProvider");
   return context;
 };

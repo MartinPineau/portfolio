@@ -1,7 +1,10 @@
 import { type Project } from "../types";
 import Button from "./Button";
 
-type ProjectCardProps = Pick<Project, "title" | "description" | "image" | "href"> & {
+type ProjectCardProps = Pick<
+  Project,
+  "title" | "description" | "image" | "href"
+> & {
   imagePosition?: "left" | "right";
 };
 
@@ -47,11 +50,7 @@ const ProjectCard = ({
       <div
         className={`w-full md:w-1/2 ${imageFirst ? "md:order-1" : "md:order-2"}`}
       >
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover"
-        />
+        <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
     </article>
   );

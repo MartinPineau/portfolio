@@ -5,12 +5,17 @@ import { z } from "zod";
 
 const STORAGE_KEY = "portfolio_messages";
 
-function contactsReducer(state: ContactMessage[], action: ContactsAction): ContactMessage[] {
+function contactsReducer(
+  state: ContactMessage[],
+  action: ContactsAction,
+): ContactMessage[] {
   switch (action.type) {
     case "ADD":
       return [action.payload, ...state];
     case "MARK_READ":
-      return state.map((m) => (m.id === action.payload ? { ...m, read: true } : m));
+      return state.map((m) =>
+        m.id === action.payload ? { ...m, read: true } : m,
+      );
   }
 }
 
@@ -22,7 +27,11 @@ function getInitialMessages(): ContactMessage[] {
 }
 
 export const ContactsProvider = ({ children }: { children: ReactNode }) => {
-  const [messages, dispatch] = useReducer(contactsReducer, undefined, getInitialMessages);
+  const [messages, dispatch] = useReducer(
+    contactsReducer,
+    undefined,
+    getInitialMessages,
+  );
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));

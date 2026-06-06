@@ -6,12 +6,16 @@ import EditProjectModal from "../components/EditProjectModal";
 
 const ProjectImage = ({ project }: { project: Project }) =>
   project.image ? (
-    <img src={project.image} alt={project.title} className="w-16 h-12 object-cover rounded-lg" />
+    <img
+      src={project.image}
+      alt={project.title}
+      className="w-16 h-12 object-cover rounded-lg"
+    />
   ) : (
     <div className="w-16 h-12 rounded-lg bg-[var(--color-gray-light)]" />
   );
 
-const DashboardPage = () => {
+const AdminProjectsPage = () => {
   const { projects, deleteProject } = useProjects();
   const [editingProject, setEditingProject] = useState<Project | null>(null);
 
@@ -31,7 +35,10 @@ const DashboardPage = () => {
       </h1>
 
       <div className="bg-white rounded-2xl shadow-sm overflow-x-auto">
-        <table className="w-full text-sm" style={{ fontFamily: "var(--font-nunito)" }}>
+        <table
+          className="w-full text-sm"
+          style={{ fontFamily: "var(--font-nunito)" }}
+        >
           <thead>
             <tr className="border-b border-[var(--color-gray-light)] text-left text-[var(--color-gray-medium)]">
               <th className="px-6 py-4 font-semibold">Image</th>
@@ -47,10 +54,18 @@ const DashboardPage = () => {
                 key={project.id}
                 className="border-b border-[var(--color-gray-light)] last:border-0 hover:bg-[var(--color-bg-light)] transition-colors"
               >
-                <td className="px-6 py-4"><ProjectImage project={project} /></td>
-                <td className="px-6 py-4 font-semibold text-[var(--color-main-dark)] whitespace-nowrap">{project.title}</td>
-                <td className="px-6 py-4 text-[var(--color-gray-medium)] max-w-xs truncate">{project.description}</td>
-                <td className="px-6 py-4 text-[var(--color-gray-medium)] whitespace-nowrap">{project.href}</td>
+                <td className="px-6 py-4">
+                  <ProjectImage project={project} />
+                </td>
+                <td className="px-6 py-4 font-semibold text-[var(--color-main-dark)] whitespace-nowrap">
+                  {project.title}
+                </td>
+                <td className="px-6 py-4 text-[var(--color-gray-medium)] max-w-xs truncate">
+                  {project.description}
+                </td>
+                <td className="px-6 py-4 text-[var(--color-gray-medium)] whitespace-nowrap">
+                  {project.href}
+                </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <button
@@ -83,4 +98,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default AdminProjectsPage;

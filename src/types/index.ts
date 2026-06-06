@@ -22,7 +22,9 @@ export const ContactMessageSchema = z.object({
   id: z.string(),
   name: z.string().min(1, "Nom requis"),
   email: z.email("Doit être un email valide"),
-  message: z.string().min(10, "Le message doit contenir au moins 10 caractères"),
+  message: z
+    .string()
+    .min(10, "Le message doit contenir au moins 10 caractères"),
   sentAt: z.iso.datetime(),
   read: z.boolean(),
 });
