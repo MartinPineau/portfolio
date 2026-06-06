@@ -1,29 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  type ReactNode,
-} from "react";
+import { useReducer, useEffect, type ReactNode } from "react";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
-
-export type Project = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  href: string;
-};
-
-type ProjectsContextType = {
-  projects: Project[];
-  updateProject: (id: string, updated: Omit<Project, "id">) => void;
-  deleteProject: (id: string) => void;
-};
-
-const ProjectsContext = createContext<ProjectsContextType | null>(null);
+import { type Project } from "../types";
+import { ProjectsContext, type ProjectsAction } from "./projectsContext";
 
 const STORAGE_KEY = "portfolio_projects";
 
@@ -51,35 +31,36 @@ const defaultProjects: Project[] = [
   },
 ];
 
+function projectsReducer(state: Project[], action: ProjectsAction): Project[] {
+  switch (action.type) {
+    case "ADD":
+      return [...state, action.payload];
+    case "UPDATE":
+      return state.map((p) => (p.id === action.payload.id ? action.payload : p));
+    case "DELETE":
+      return state.filter((p) => p.id !== action.payload);
+  }
+}
+
+function getInitialProjects(): Project[] {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored ? JSON.parse(stored) : defaultProjects;
+}
+
 export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
-  const [projects, setProjects] = useState<Project[]>(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : defaultProjects;
-  });
+  const [projects, dispatch] = useReducer(projectsReducer, undefined, getInitialProjects);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
   }, [projects]);
 
-  const updateProject = (id: string, updated: Omit<Project, "id">) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === id ? { ...updated, id } : p))
-    );
-  };
-
-  const deleteProject = (id: string) => {
-    setProjects((prev) => prev.filter((p) => p.id !== id));
-  };
+  const addProject = (project: Project) => dispatch({ type: "ADD", payload: project });
+  const updateProject = (project: Project) => dispatch({ type: "UPDATE", payload: project });
+  const deleteProject = (id: string) => dispatch({ type: "DELETE", payload: id });
 
   return (
-    <ProjectsContext.Provider value={{ projects, updateProject, deleteProject }}>
+    <ProjectsContext.Provider value={{ projects, addProject, updateProject, deleteProject }}>
       {children}
     </ProjectsContext.Provider>
   );
-};
-
-export const useProjects = () => {
-  const context = useContext(ProjectsContext);
-  if (!context) throw new Error("useProjects must be used within a ProjectsProvider");
-  return context;
 };

@@ -1,4 +1,4 @@
-import { useProjects } from "../context/ProjectsContext";
+import { useProjects } from "../hooks/useProjects";
 import ProjectCard from "./ProjectCard";
 
 const ProjectList = () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { Project } from "../context/ProjectsContext";
-import { useProjects } from "../context/ProjectsContext";
+import { type Project } from "../types";
+import { useProjects } from "../hooks/useProjects";
 import FormInput from "./FormInput";
 import Button from "./Button";
 
@@ -25,7 +25,7 @@ const EditProjectModal = ({ project, onClose }: Props) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateProject(project.id, form);
+    updateProject({ ...form, id: project.id });
     onClose();
   };
 

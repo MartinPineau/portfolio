@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
-import { useProjects, type Project } from "../context/ProjectsContext";
+import { type Project } from "../types";
+import { useProjects } from "../hooks/useProjects";
 import EditProjectModal from "../components/EditProjectModal";
 
 const ProjectImage = ({ project }: { project: Project }) =>
