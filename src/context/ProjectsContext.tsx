@@ -2,8 +2,9 @@ import { useReducer, useEffect, type ReactNode } from "react";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
-import { type Project } from "../types";
+import { ProjectSchema, type Project } from "../types";
 import { ProjectsContext, type ProjectsAction } from "./projectsContext";
+import { z } from "zod";
 
 const STORAGE_KEY = "portfolio_projects";
 
@@ -44,7 +45,9 @@ function projectsReducer(state: Project[], action: ProjectsAction): Project[] {
 
 function getInitialProjects(): Project[] {
   const stored = localStorage.getItem(STORAGE_KEY);
-  return stored ? JSON.parse(stored) : defaultProjects;
+  if (!stored) return defaultProjects;
+  const result = z.array(ProjectSchema).safeParse(JSON.parse(stored));
+  return result.success ? result.data : defaultProjects;
 }
 
 export const ProjectsProvider = ({ children }: { children: ReactNode }) => {

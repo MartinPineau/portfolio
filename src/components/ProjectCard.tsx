@@ -1,11 +1,8 @@
+import { type Project } from "../types";
 import Button from "./Button";
 
-type ProjectCardProps = {
-  title: string;
-  description: string;
-  image: string;
+type ProjectCardProps = Pick<Project, "title" | "description" | "image" | "href"> & {
   imagePosition?: "left" | "right";
-  href?: string;
 };
 
 const ProjectCard = ({
@@ -13,7 +10,7 @@ const ProjectCard = ({
   description,
   image,
   imagePosition = "right",
-  href = "#",
+  href,
 }: ProjectCardProps) => {
   const imageFirst = imagePosition === "right";
 
@@ -40,12 +37,9 @@ const ProjectCard = ({
           </p>
 
           <div style={{ fontFamily: "var(--font-roboto)" }}>
-            <Button
-              variant="pill-outline"
-              onClick={() => (window.location.href = href)}
-            >
-              View Project
-            </Button>
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              <Button variant="pill-outline">View Project</Button>
+            </a>
           </div>
         </div>
       </div>

@@ -1,11 +1,5 @@
 import { FaQuoteLeft } from "react-icons/fa6";
-
-export type Testimonial = {
-  quote: string;
-  author: string;
-  role: string;
-  initials: string;
-};
+import { type Testimonial } from "../types";
 
 const TestimonialCard = ({ quote, author, role, initials }: Testimonial) => {
   return (
