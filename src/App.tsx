@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { AuthProvider } from "./context/AuthContext";
-import { ProjectsProvider } from "./context/ProjectsContext";
-import { ContactsProvider } from "./context/ContactsContext";
+import { AuthProvider } from "./context/AuthContext.tsx";
+import { ProjectsProvider } from "./context/ProjectsContext.tsx";
+import { ContactsProvider } from "./context/ContactsContext.tsx";
 import HomeLayout from "./layouts/HomeLayout";
 import BaseLayout from "./layouts/BaseLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -14,6 +14,7 @@ const ContactsPage = lazy(() => import("./pages/ContactsPage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const AdminProjectsPage = lazy(() => import("./pages/AdminProjectsPage"));
+const AdminContactsPage = lazy(() => import("./pages/AdminContactsPage"));
 const ProjectDetailPage = lazy(() => import("./pages/ProjectDetailPage"));
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
                 <Route element={<ProtectedRoute />}>
                   <Route path="/admin" element={<AdminLayout />}>
                     <Route path="projects" element={<AdminProjectsPage />} />
+                    <Route path="contacts" element={<AdminContactsPage />} />
                   </Route>
                 </Route>
               </Routes>

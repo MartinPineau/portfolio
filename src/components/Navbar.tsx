@@ -49,14 +49,24 @@ const Navbar = () => {
             </li>
           ))}
           {user && (
-            <li>
-              <Link
-                to="/admin/projects"
-                className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
-              >
-                Dashboard
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link
+                  to="/admin/projects"
+                  className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
+                >
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/contacts"
+                  className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
+                >
+                  Messages
+                </Link>
+              </li>
+            </>
           )}
         </ul>
         <button
@@ -95,15 +105,26 @@ const Navbar = () => {
               </li>
             ))}
             {user && (
-              <li>
-                <Link
-                  to="/admin/projects"
-                  className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link
+                    to="/admin/projects"
+                    className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Projects
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/contacts"
+                    className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Messages
+                  </Link>
+                </li>
+              </>
             )}
             <li>
               <button
