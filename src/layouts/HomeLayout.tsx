@@ -11,9 +11,11 @@ const HomeLayout = () => {
         alt=""
         className="absolute top-0 right-0 w-[55%] max-w-[600px] h-auto pointer-events-none select-none"
       />
-      <div className="relative">
+      <div className="relative flex flex-col min-h-screen">
         <Navbar />
-        <Outlet />
+        <main className="flex-1">
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>

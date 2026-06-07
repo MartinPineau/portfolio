@@ -1,40 +1,55 @@
+import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
-import { parseGoogleCredential } from "../services/authService";
+import { isAuthorizedEmail, parseGoogleCredential } from "../services/authService";
 
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg-light)] flex items-center justify-center">
-      <div className="bg-white rounded-2xl shadow-sm p-12 flex flex-col items-center gap-8 w-full max-w-sm">
-        <h1
-          className="text-3xl font-bold text-[var(--color-main-dark)]"
-          style={{ fontFamily: "var(--font-playfair)" }}
-        >
-          Admin
-        </h1>
+    <section className="max-w-md mx-auto px-10 py-16 flex flex-col items-center text-center gap-6">
+      <h1
+        className="text-5xl font-bold text-[var(--color-main-dark)]"
+        style={{ fontFamily: "var(--font-playfair)" }}
+      >
+        Admin
+      </h1>
+      <p
+        className="text-base text-[var(--color-gray-medium)] leading-relaxed"
+        style={{ fontFamily: "var(--font-nunito)" }}
+      >
+        Connectez-vous avec votre compte Google pour accéder au tableau de
+        bord.
+      </p>
+      <GoogleLogin
+        onSuccess={({ credential }) => {
+          if (!credential) return;
+          const user = parseGoogleCredential(credential);
+          if (!user) return;
+          if (!isAuthorizedEmail(user.email)) {
+            setError(
+              "Ce compte Google n'est pas autorisé à accéder à l'administration.",
+            );
+            return;
+          }
+          setError(null);
+          login(user);
+          navigate("/admin/projects");
+        }}
+        onError={() => console.error("Échec de la connexion Google")}
+      />
+      {error && (
         <p
-          className="text-sm text-[var(--color-gray-medium)] text-center"
+          className="text-sm text-red-500"
           style={{ fontFamily: "var(--font-nunito)" }}
         >
-          Connectez-vous avec votre compte Google pour accéder au tableau de
-          bord.
+          {error}
         </p>
-        <GoogleLogin
-          onSuccess={({ credential }) => {
-            if (!credential) return;
-            const user = parseGoogleCredential(credential);
-            if (!user) return;
-            login(user);
-            navigate("/admin/projects");
-          }}
-          onError={() => console.error("Échec de la connexion Google")}
-        />
-      </div>
-    </div>
+      )}
+    </section>
   );
 };
 

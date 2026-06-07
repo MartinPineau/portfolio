@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { FaBars, FaXmark } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaBars, FaXmark } from "react-icons/fa6";
 import { useAuth } from "../hooks/useAuth";
 
 const navLinks = [
@@ -14,12 +14,13 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleAuth = () => {
-    if (user) {
-      logout();
-    } else {
-      navigate("/login");
-    }
+  const handleLogin = () => {
+    navigate("/login");
+    setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
     setMenuOpen(false);
   };
 
@@ -69,12 +70,32 @@ const Navbar = () => {
             </>
           )}
         </ul>
-        <button
-          onClick={handleAuth}
-          className="text-sm font-semibold px-4 py-2 rounded-xl border border-[var(--color-main-dark)] text-[var(--color-main-dark)] hover:bg-[var(--color-main-dark)] hover:text-white transition-colors cursor-pointer"
-        >
-          {user ? "Logout" : "Login"}
-        </button>
+        {user ? (
+          <div className="flex items-center gap-3">
+            <img
+              src={user.avatarUrl}
+              alt={user.name}
+              title={user.name}
+              className="w-9 h-9 rounded-full object-cover border border-[var(--color-main-dark)]"
+              referrerPolicy="no-referrer"
+            />
+            <button
+              onClick={handleLogout}
+              className="p-2 rounded-full text-[var(--color-main-dark)] hover:bg-[var(--color-main-dark)] hover:text-white transition-colors cursor-pointer"
+              title="Logout"
+              aria-label="Logout"
+            >
+              <FaArrowRightFromBracket className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={handleLogin}
+            className="text-sm font-semibold px-4 py-2 rounded-xl border border-[var(--color-main-dark)] text-[var(--color-main-dark)] hover:bg-[var(--color-main-dark)] hover:text-white transition-colors cursor-pointer"
+          >
+            Login
+          </button>
+        )}
       </nav>
 
       {/* Burger button */}
@@ -127,12 +148,31 @@ const Navbar = () => {
               </>
             )}
             <li>
-              <button
-                onClick={handleAuth}
-                className="text-base text-[var(--color-main-dark)] hover:underline transition-colors cursor-pointer"
-              >
-                {user ? "Logout" : "Login"}
-              </button>
+              {user ? (
+                <div className="flex items-center gap-3">
+                  <img
+                    src={user.avatarUrl}
+                    alt={user.name}
+                    title={user.name}
+                    className="w-8 h-8 rounded-full object-cover border border-[var(--color-main-dark)]"
+                    referrerPolicy="no-referrer"
+                  />
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 text-base text-[var(--color-main-dark)] hover:underline transition-colors cursor-pointer"
+                  >
+                    <FaArrowRightFromBracket className="w-4 h-4" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={handleLogin}
+                  className="text-base text-[var(--color-main-dark)] hover:underline transition-colors cursor-pointer"
+                >
+                  Login
+                </button>
+              )}
             </li>
           </ul>
         </nav>

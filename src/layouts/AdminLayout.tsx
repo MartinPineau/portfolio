@@ -4,9 +4,11 @@ import Footer from "../components/Footer";
 
 const AdminLayout = () => {
   return (
-    <div className="min-h-screen bg-[var(--color-bg-light)]">
+    <div className="min-h-screen flex flex-col bg-[var(--color-bg-light)]">
       <Navbar />
-      <Outlet />
+      <main className="flex-1">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );
