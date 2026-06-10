@@ -1,32 +1,57 @@
-import { useState } from "react";
-import { type Project } from "../types";
+import { useState, type FormEvent } from "react";
+import { z } from "zod";
+import { ProjectSchema, type Project } from "../types";
 import { useProjects } from "../hooks/useProjects";
 import FormInput from "./FormInput";
 import Button from "./Button";
 
 type Props = {
-  project: Project;
+  project?: Project;
   onClose: () => void;
 };
 
-const EditProjectModal = ({ project, onClose }: Props) => {
-  const { updateProject } = useProjects();
+const FormSchema = ProjectSchema.omit({ id: true });
+type FieldErrors = Partial<Record<keyof z.infer<typeof FormSchema>, string>>;
 
-  const [form, setForm] = useState({
-    title: project.title,
-    description: project.description,
-    image: project.image,
-    href: project.href,
-  });
+const emptyForm = { title: "", description: "", image: "", href: "" };
+
+const EditProjectModal = ({ project, onClose }: Props) => {
+  const { addProject, updateProject } = useProjects();
+  const isNew = !project;
+
+  const [form, setForm] = useState(
+    project
+      ? { title: project.title, description: project.description, image: project.image, href: project.href }
+      : emptyForm,
+  );
+  const [errors, setErrors] = useState<FieldErrors>({});
 
   const handleChange =
     (field: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setForm((prev) => ({ ...prev, [field]: e.target.value }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    updateProject({ ...form, id: project.id });
+
+    const result = FormSchema.safeParse(form);
+    if (!result.success) {
+      const fieldErrors: FieldErrors = {};
+      for (const issue of result.error.issues) {
+        const key = issue.path[0] as keyof FieldErrors;
+        if (!fieldErrors[key]) fieldErrors[key] = issue.message;
+      }
+      setErrors(fieldErrors);
+      return;
+    }
+
+    if (isNew) {
+      addProject({ id: crypto.randomUUID(), ...result.data });
+    } else {
+      updateProject({ id: project.id, ...result.data });
+    }
     onClose();
   };
 
@@ -43,7 +68,7 @@ const EditProjectModal = ({ project, onClose }: Props) => {
           className="text-2xl font-bold text-[var(--color-main-dark)] mb-6"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          Edit project
+          {isNew ? "New project" : "Edit project"}
         </h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -52,24 +77,28 @@ const EditProjectModal = ({ project, onClose }: Props) => {
             type="text"
             value={form.title}
             onChange={handleChange("title")}
+            error={errors.title}
           />
           <FormInput
             label="Description"
             multiline
             value={form.description}
             onChange={handleChange("description")}
+            error={errors.description}
           />
           <FormInput
             label="Image URL"
             type="text"
             value={form.image}
             onChange={handleChange("image")}
+            error={errors.image}
           />
           <FormInput
             label="Link"
             type="text"
             value={form.href}
             onChange={handleChange("href")}
+            error={errors.href}
           />
 
           <div className="flex justify-end gap-3 mt-2">
@@ -77,7 +106,7 @@ const EditProjectModal = ({ project, onClose }: Props) => {
               Cancel
             </Button>
             <Button variant="primary" type="submit">
-              Save
+              {isNew ? "Create" : "Save"}
             </Button>
           </div>
         </form>

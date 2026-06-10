@@ -3,6 +3,7 @@ import { FaPencil, FaTrash } from "react-icons/fa6";
 import { type Project } from "../types";
 import { useProjects } from "../hooks/useProjects";
 import EditProjectModal from "../components/EditProjectModal";
+import Button from "../components/Button";
 
 const ProjectImage = ({ project }: { project: Project }) =>
   project.image ? (
@@ -18,6 +19,7 @@ const ProjectImage = ({ project }: { project: Project }) =>
 const AdminProjectsPage = () => {
   const { projects, deleteProject } = useProjects();
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [showCreate, setShowCreate] = useState(false);
 
   const handleDelete = (project: Project) => {
     if (window.confirm(`Supprimer "${project.title}" ?`)) {
@@ -27,12 +29,17 @@ const AdminProjectsPage = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-6 md:px-10 py-16">
-      <h1
-        className="text-3xl font-bold text-[var(--color-main-dark)] mb-10"
-        style={{ fontFamily: "var(--font-playfair)" }}
-      >
-        Dashboard
-      </h1>
+      <div className="flex items-center justify-between mb-10">
+        <h1
+          className="text-3xl font-bold text-[var(--color-main-dark)]"
+          style={{ fontFamily: "var(--font-playfair)" }}
+        >
+          Dashboard
+        </h1>
+        <Button variant="primary" onClick={() => setShowCreate(true)}>
+          + Add project
+        </Button>
+      </div>
 
       <div className="bg-white rounded-2xl shadow-sm overflow-x-auto">
         <table
@@ -93,6 +100,10 @@ const AdminProjectsPage = () => {
           project={editingProject}
           onClose={() => setEditingProject(null)}
         />
+      )}
+
+      {showCreate && (
+        <EditProjectModal onClose={() => setShowCreate(false)} />
       )}
     </div>
   );
