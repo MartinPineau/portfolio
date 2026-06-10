@@ -5,7 +5,7 @@ const testimonials: Testimonial[] = [
   {
     id: "1",
     quote:
-      "Working with Madelyn was an absolute pleasure. Her attention to detail and creative vision transformed our product into something truly exceptional.",
+      "Working with Martin was an absolute pleasure. His attention to detail and creative vision transformed our product into something truly exceptional.",
     author: "Sarah Johnson",
     role: "Product Manager at Acme Corp",
     initials: "SJ",
@@ -14,7 +14,7 @@ const testimonials: Testimonial[] = [
   {
     id: "2",
     quote:
-      "Madelyn delivered outstanding UI/UX work on a tight deadline. She understood our needs immediately and exceeded every expectation we had.",
+      "Martin delivered outstanding UI/UX work on a tight deadline. He understood our needs immediately and exceeded every expectation we had.",
     author: "Thomas Bernard",
     role: "CTO at StartupX",
     initials: "TB",
@@ -23,7 +23,7 @@ const testimonials: Testimonial[] = [
   {
     id: "3",
     quote:
-      "Her designs are clean, intuitive and always user-centered. I highly recommend Madelyn to anyone looking for a talented and professional designer.",
+      "His designs are clean, intuitive and always user-centered. I highly recommend Martin to anyone looking for a talented and professional designer.",
     author: "Laura Chen",
     role: "CEO at DesignLab",
     initials: "LC",

@@ -14,7 +14,7 @@ const Intro = () => {
         className="text-6xl font-extrabold leading-tight text-[var(--color-main-dark)] mb-8"
         style={{ fontFamily: "var(--font-poppins)" }}
       >
-        Hello, my name is Madelyn Torff
+        Hello, my name is Martin Pineau
       </h1>
 
       <p

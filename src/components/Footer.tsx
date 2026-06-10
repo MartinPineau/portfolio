@@ -17,7 +17,7 @@ const Footer = () => {
           <FaEnvelope className="inline-block mx-2 w-8 h-8 text-[var(--color-main-dark)]" />
         </p>
         <p className="text-sm text-[var(--color-gray-medium)] mt-4">
-          Madelyn Torff 2021
+          Martin Pineau 2026
         </p>
       </div>
     </footer>
