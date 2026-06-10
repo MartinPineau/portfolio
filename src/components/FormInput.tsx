@@ -1,9 +1,15 @@
-import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import type {
+  ChangeEventHandler,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+} from "react";
 
-type FormInputProps = InputHTMLAttributes<HTMLInputElement> & {
+type FormInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
   label: string;
+  error?: string;
   multiline?: boolean;
   rows?: TextareaHTMLAttributes<HTMLTextAreaElement>["rows"];
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 
 const inputClass =
@@ -11,8 +17,10 @@ const inputClass =
 
 const FormInput = ({
   label,
+  error,
   multiline = false,
   rows = 6,
+  onChange,
   ...rest
 }: FormInputProps) => {
   return (
@@ -22,9 +30,22 @@ const FormInput = ({
     >
       <label className="text-sm text-[var(--color-main-dark)]">{label}</label>
       {multiline ? (
-        <textarea className={`${inputClass} resize-none`} rows={rows} />
+        <textarea
+          className={`${inputClass} resize-none`}
+          rows={rows}
+          name={rest.name}
+          value={rest.value as string}
+          onChange={onChange as ChangeEventHandler<HTMLTextAreaElement>}
+        />
       ) : (
-        <input className={inputClass} {...rest} />
+        <input
+          className={inputClass}
+          {...rest}
+          onChange={onChange as ChangeEventHandler<HTMLInputElement>}
+        />
+      )}
+      {error && (
+        <span className="text-sm text-red-500">{error}</span>
       )}
     </div>
   );

@@ -62,25 +62,33 @@ const AdminContactsPage = () => {
                 <tr
                   key={message.id}
                   onClick={() => handleOpen(message)}
-                  className="border-b border-[var(--color-gray-light)] last:border-0 hover:bg-[var(--color-bg-light)] transition-colors cursor-pointer"
+                  className={`border-b border-[var(--color-gray-light)] last:border-0 hover:bg-[var(--color-bg-light)] transition-colors cursor-pointer ${
+                    message.read ? "opacity-60" : "bg-[var(--color-main-yellow)]/5"
+                  }`}
                 >
                   <td className="px-6 py-4">
                     <span
                       className={`inline-block w-2.5 h-2.5 rounded-full ${
                         message.read
-                          ? "bg-[var(--color-gray-light)]"
+                          ? "bg-[var(--color-gray-medium)]"
                           : "bg-[var(--color-main-yellow)]"
                       }`}
                       aria-label={message.read ? "Read" : "Unread"}
                     />
                   </td>
-                  <td className="px-6 py-4 font-semibold text-[var(--color-main-dark)] whitespace-nowrap">
+                  <td className={`px-6 py-4 whitespace-nowrap text-[var(--color-main-dark)] ${
+                    message.read ? "font-normal" : "font-bold"
+                  }`}>
                     {message.name}
                   </td>
-                  <td className="px-6 py-4 text-[var(--color-gray-medium)] whitespace-nowrap">
+                  <td className={`px-6 py-4 whitespace-nowrap ${
+                    message.read ? "text-[var(--color-gray-medium)]" : "text-[var(--color-main-dark)]"
+                  }`}>
                     {message.email}
                   </td>
-                  <td className="px-6 py-4 text-[var(--color-gray-medium)] max-w-xs truncate">
+                  <td className={`px-6 py-4 max-w-xs truncate ${
+                    message.read ? "text-[var(--color-gray-medium)]" : "text-[var(--color-main-dark)]"
+                  }`}>
                     {message.message}
                   </td>
                   <td className="px-6 py-4 text-[var(--color-gray-medium)] whitespace-nowrap">
