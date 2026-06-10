@@ -7,6 +7,7 @@ import HomeLayout from "./layouts/HomeLayout";
 import BaseLayout from "./layouts/BaseLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Spinner from "./components/Spinner";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -16,6 +17,7 @@ const LoginPage = lazy(() => import("./pages/LoginPage"));
 const AdminProjectsPage = lazy(() => import("./pages/AdminProjectsPage"));
 const AdminContactsPage = lazy(() => import("./pages/AdminContactsPage"));
 const ProjectDetailPage = lazy(() => import("./pages/ProjectDetailPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App = () => {
   return (
@@ -23,7 +25,7 @@ const App = () => {
       <ProjectsProvider>
         <ContactsProvider>
           <BrowserRouter>
-            <Suspense fallback={null}>
+            <Suspense fallback={<Spinner />}>
               <Routes>
                 <Route element={<HomeLayout />}>
                   <Route path="/" element={<HomePage />} />
@@ -40,6 +42,9 @@ const App = () => {
                     <Route path="projects" element={<AdminProjectsPage />} />
                     <Route path="contacts" element={<AdminContactsPage />} />
                   </Route>
+                </Route>
+                <Route element={<BaseLayout />}>
+                  <Route path="*" element={<NotFoundPage />} />
                 </Route>
               </Routes>
             </Suspense>
