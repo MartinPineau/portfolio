@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import { ProjectsProvider } from "./context/ProjectsContext.tsx";
 import { ContactsProvider } from "./context/ContactsContext.tsx";
+import { TestimonialsProvider } from "./context/TestimonialsContext.tsx";
 import HomeLayout from "./layouts/HomeLayout";
 import BaseLayout from "./layouts/BaseLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -19,12 +20,14 @@ const AdminContactsPage = lazy(() => import("./pages/AdminContactsPage"));
 const ProjectDetailPage = lazy(() => import("./pages/ProjectDetailPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
+const AdminTestimonialsPage = lazy(() => import("./pages/AdminTestimonialsPage"));
 
 const App = () => {
   return (
     <AuthProvider>
       <ProjectsProvider>
         <ContactsProvider>
+          <TestimonialsProvider>
           <BrowserRouter>
             <Suspense fallback={<Spinner />}>
               <Routes>
@@ -43,6 +46,10 @@ const App = () => {
                     <Route index element={<AdminDashboardPage />} />
                     <Route path="projects" element={<AdminProjectsPage />} />
                     <Route path="contacts" element={<AdminContactsPage />} />
+                    <Route
+                      path="testimonials"
+                      element={<AdminTestimonialsPage />}
+                    />
                   </Route>
                 </Route>
                 <Route element={<BaseLayout />}>
@@ -51,6 +58,7 @@ const App = () => {
               </Routes>
             </Suspense>
           </BrowserRouter>
+          </TestimonialsProvider>
         </ContactsProvider>
       </ProjectsProvider>
     </AuthProvider>

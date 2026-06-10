@@ -6,6 +6,7 @@ const adminTabs = [
   { label: "Dashboard", to: "/admin", end: true },
   { label: "Projects", to: "/admin/projects", end: false },
   { label: "Messages", to: "/admin/contacts", end: false },
+  { label: "Testimonials", to: "/admin/testimonials", end: false },
 ];
 
 const AdminLayout = () => {

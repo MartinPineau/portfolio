@@ -3,11 +3,13 @@ import {
   FaDiagramProject,
   FaEnvelope,
   FaBell,
+  FaQuoteLeft,
   FaArrowRight,
 } from "react-icons/fa6";
 import type { IconType } from "react-icons";
 import { useProjects } from "../hooks/useProjects";
 import { useContacts } from "../hooks/useContacts";
+import { useTestimonials } from "../hooks/useTestimonials";
 
 type StatCardProps = {
   label: string;
@@ -66,8 +68,10 @@ const StatCard = ({ label, value, to, icon: Icon, highlight }: StatCardProps) =>
 const AdminDashboardPage = () => {
   const { projects } = useProjects();
   const { messages } = useContacts();
+  const { testimonials } = useTestimonials();
 
   const unreadCount = messages.filter((m) => !m.read).length;
+  const visibleTestimonials = testimonials.filter((t) => t.visible).length;
 
   return (
     <div className="max-w-5xl mx-auto px-6 md:px-10 py-16">
@@ -84,7 +88,7 @@ const AdminDashboardPage = () => {
         KPIs of your portfolio activity.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-6">
         <StatCard
           label="Projects"
           value={projects.length}
@@ -103,6 +107,12 @@ const AdminDashboardPage = () => {
           to="/admin/contacts"
           icon={FaBell}
           highlight={unreadCount > 0}
+        />
+        <StatCard
+          label="Visible testimonials"
+          value={visibleTestimonials}
+          to="/admin/testimonials"
+          icon={FaQuoteLeft}
         />
       </div>
     </div>
