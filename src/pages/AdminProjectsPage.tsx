@@ -34,7 +34,7 @@ const AdminProjectsPage = () => {
           className="text-3xl font-bold text-[var(--color-main-dark)]"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          Dashboard
+          Projects
         </h1>
         <Button variant="primary" onClick={() => setShowCreate(true)}>
           + Add project

@@ -18,6 +18,7 @@ const AdminProjectsPage = lazy(() => import("./pages/AdminProjectsPage"));
 const AdminContactsPage = lazy(() => import("./pages/AdminContactsPage"));
 const ProjectDetailPage = lazy(() => import("./pages/ProjectDetailPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
                 </Route>
                 <Route element={<ProtectedRoute />}>
                   <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboardPage />} />
                     <Route path="projects" element={<AdminProjectsPage />} />
                     <Route path="contacts" element={<AdminContactsPage />} />
                   </Route>

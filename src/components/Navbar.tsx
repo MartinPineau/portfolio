@@ -50,24 +50,14 @@ const Navbar = () => {
             </li>
           ))}
           {user && (
-            <>
-              <li>
-                <Link
-                  to="/admin/projects"
-                  className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
-                >
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/admin/contacts"
-                  className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
-                >
-                  Messages
-                </Link>
-              </li>
-            </>
+            <li>
+              <Link
+                to="/admin"
+                className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
+              >
+                Admin
+              </Link>
+            </li>
           )}
         </ul>
         {user ? (
@@ -126,26 +116,15 @@ const Navbar = () => {
               </li>
             ))}
             {user && (
-              <>
-                <li>
-                  <Link
-                    to="/admin/projects"
-                    className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Projects
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/admin/contacts"
-                    className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Messages
-                  </Link>
-                </li>
-              </>
+              <li>
+                <Link
+                  to="/admin"
+                  className="text-base text-[var(--color-main-dark)] hover:underline transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Admin
+                </Link>
+              </li>
             )}
             <li>
               {user ? (
