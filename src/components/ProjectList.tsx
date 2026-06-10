@@ -14,6 +14,7 @@ const ProjectList = () => {
           image={project.image}
           imagePosition={index % 2 === 0 ? "left" : "right"}
           href={project.href}
+          tags={project.tags}
         />
       ))}
     </div>

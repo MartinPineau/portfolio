@@ -3,7 +3,7 @@ import Button from "./Button";
 
 type ProjectCardProps = Pick<
   Project,
-  "title" | "description" | "image" | "href"
+  "title" | "description" | "image" | "href" | "tags"
 > & {
   imagePosition?: "left" | "right";
 };
@@ -14,6 +14,7 @@ const ProjectCard = ({
   image,
   imagePosition = "right",
   href,
+  tags,
 }: ProjectCardProps) => {
   const imageFirst = imagePosition === "right";
 
@@ -38,6 +39,20 @@ const ProjectCard = ({
           >
             {description}
           </p>
+
+          {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-8">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-[var(--color-main-yellow)]/20 text-[var(--color-main-dark)] text-xs font-semibold px-3 py-1 rounded-full"
+                  style={{ fontFamily: "var(--font-nunito)" }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
 
           <div style={{ fontFamily: "var(--font-roboto)" }}>
             <a href={href} target="_blank" rel="noopener noreferrer">
